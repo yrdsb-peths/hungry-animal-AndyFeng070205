@@ -3,9 +3,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class MyWorld here.
  * 
- * @author Andy
+ * @author (your name) 
  * @version (a version number or a date)
  */
+
 public class MyWorld extends World
 {
 
@@ -13,53 +14,56 @@ public class MyWorld extends World
      * Constructor for objects of class MyWorld.
      * 
      */
+    private int count = 0;
     public int score = 0;
-    public Label Score;
+    private Label Score;
+    private Label Hp;
     public int life = 3;
-    public Label Life;
     public MyWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1, false); 
+        super(400, 800, 1); 
         
-        Elephant elephant = new Elephant();
-        addObject(elephant, 300, 300);
+        Rocket rocket = new Rocket();
+        addObject(rocket, 200, 700);
         
-        Score = new Label(0, 45);
-        addObject(Score, 20, 20);
+        Score = new Label(0, 40);
+        addObject(Score, 27, 27);
         
-        Life = new Label("3", 45);
-        addObject(Life, 580, 20);
-        
-        createApple();
+        Hp = new Label(3, 40);
+        addObject(Hp, 373, 27);
     }
     
-    public void createApple(){
-        Apple apple = new Apple();
-        int x = Greenfoot.getRandomNumber(600);
-        int y = 0;
-        addObject(apple, x, y);
+    public void act(){
+        count++;
+        if(count > 59){
+            createOneUfo();
+            count = 0;
+        }
+        if(Greenfoot.getRandomNumber(100) < 1) createAlien();
     }
     
     public void increaseScore(){
-         score++;
-         Score.setValue(score);
+        score++;
+        Score.setValue(score);
     }
     
-    public void damage(){
+    public void takeDamage(){
         life--;
-        Life.setValue(life);
+        Hp.setValue(life);
     }
     
-    public void gameOver1(){
-        Label lol = new Label("Game Over, You Suck :(", 50);
-        addObject(lol, 300, 200);
-        Greenfoot.stop();
+    public void createOneUfo(){
+        addObject(new Ufo(), Greenfoot.getRandomNumber(400), 0);
     }
     
-    public void gameOver2(){
-        Label win = new Label("you got lucky :>", 60);
-        addObject(win, 300, 200);
+    public void createAlien(){
+        addObject(new Alien(), Greenfoot.getRandomNumber(400), 0);
+    }
+    
+    public void gameOver(){
+        Label gameOver = new Label("mission failed :(", 40);
+        addObject(gameOver, 200, 400);
         Greenfoot.stop();
     }
 }
