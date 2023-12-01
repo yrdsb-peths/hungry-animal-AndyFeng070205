@@ -6,21 +6,27 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Bullet extends Actor
+public class Bullet extends Power
 {
     /**
      * Act - do whatever the Bullet wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int hitNum = 0;
+    
+    public Bullet(){
+        super("normal", Integer.MAX_VALUE);
+    }
+    
+    public boolean canFire = true;
+    
     public void act()
     {
-        setRotation(-90);
+        //setRotation(-90);
         move(5);
         
         MyWorld myworld = (MyWorld) getWorld();
         
-        if (isAtEdge()) {
+        if(isAtEdge()){
             myworld.removeObject(this);
             return; 
         }
@@ -31,5 +37,6 @@ public class Bullet extends Actor
             myworld.removeObject(this);
             return;
         }
+        
     }
 }

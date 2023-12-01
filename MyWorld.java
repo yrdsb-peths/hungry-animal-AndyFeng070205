@@ -19,6 +19,7 @@ public class MyWorld extends World
     private Label Score;
     private Label Hp;
     public int life = 3;
+    private int bossNum = 1;
     public MyWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -32,15 +33,24 @@ public class MyWorld extends World
         
         Hp = new Label(3, 40);
         addObject(Hp, 373, 27);
-    }
+        
+        Lazer s = new Lazer();
+        addObject(s, 100, 0);
+    } 
     
     public void act(){
         count++;
-        if(count > 59){
-            createOneUfo();
-            count = 0;
+        if(score < 50 || score > 70){
+            if(count > 59){
+                createOneUfo();
+                count = 0;
+            }
+            if(Greenfoot.getRandomNumber(100) < 1) createAlien();
         }
-        if(Greenfoot.getRandomNumber(100) < 1) createAlien();
+        if((score >= 50 && score <= 70) && bossNum == 1){
+            addObject(new Boss(), 200, 150);
+            bossNum = 0;
+        }
     }
     
     public void increaseScore(){
@@ -65,5 +75,9 @@ public class MyWorld extends World
         Label gameOver = new Label("mission failed :(", 40);
         addObject(gameOver, 200, 400);
         Greenfoot.stop();
+    }
+    
+    public void bossIncoming(){
+        addObject(new Boss(), 200, 150);
     }
 }

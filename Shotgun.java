@@ -1,23 +1,27 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 /**
- * Write a description of class Boss here.
+ * Write a description of class Shotgun here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Boss extends Actor
+public class Shotgun extends Power
 {
     /**
-     * Act - do whatever the Boss wants to do. This method is called whenever
+     * Act - do whatever the Shotgun wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    
+    public Shotgun(){
+        super("Shotgun", 15);
+    }
+    
     public void act()
     {
         // Add your action code here.
         MyWorld myworld = (MyWorld) getWorld();
-        if(myworld.score == 50){
-            myworld.addObject(new Boss(), 100, 200);
-        }
+        setLocation(getX(), getY() + 3);
     }
 }

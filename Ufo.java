@@ -37,6 +37,7 @@ public class Ufo extends Actor
         }
         if(hitNum == 0){
             myworld.increaseScore();
+            myworld.increaseScore();
             myworld.removeObject(this);
             return;
         }

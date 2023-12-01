@@ -1,23 +1,26 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
-/**
- * Write a description of class Boss here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Boss extends Actor
-{
-    /**
-     * Act - do whatever the Boss wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+public class Boss extends Actor {
+    private int Hp = 50;
+    
+    public void act() {
+        // Check if the Boss is still alive
+
         MyWorld myworld = (MyWorld) getWorld();
-        if(myworld.score == 50){
-            myworld.addObject(new Boss(), 100, 200);
+        if (Hp > 0) {
+            checkCollision();
+        } else {
+            getWorld().removeObject(this);
+            for(int i = 0; i < 20; i++){
+                myworld.increaseScore();
+            }
+        }
+    }
+    
+    private void checkCollision() {
+        if (isTouching(Bullet.class)) {
+            Hp--; // Decrement HP when touched by a Bullet
+            removeTouching(Bullet.class); // Remove the Bullet upon collision
         }
     }
 }
