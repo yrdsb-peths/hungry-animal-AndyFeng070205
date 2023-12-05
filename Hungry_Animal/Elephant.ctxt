@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Elephant
+comment0.text=\n\ Write\ a\ description\ of\ class\ Elephant\ here.\n\ \n\ @author\ Andy\n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=Elephant()
+comment2.params=
+comment2.target=void\ animateElephant()
+comment3.params=
+comment3.target=void\ act()
+comment4.params=
+comment4.target=void\ moreApple()
+numComments=5
