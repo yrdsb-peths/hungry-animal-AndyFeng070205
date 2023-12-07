@@ -15,12 +15,15 @@ public class endScreen extends World
      */
     
     public Label goodGame;
-    public endScreen()
+    public Label scoreCount;
+    public endScreen(int score)
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
         goodGame = new Label("Game Over", 70);
         addObject(goodGame, getWidth() / 2, getHeight() / 2 - 75);
+        scoreCount = new Label("score: "+score, 70);
+        addObject(scoreCount, 125, 35);
         prepare();
     }
     

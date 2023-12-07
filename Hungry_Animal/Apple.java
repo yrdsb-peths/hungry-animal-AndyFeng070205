@@ -25,7 +25,7 @@ public class Apple extends Actor
                 myworld.createApple();
             }
             else{
-                endScreen goodGame = new endScreen();
+                endScreen goodGame = new endScreen(myworld.score);
                 Greenfoot.setWorld(goodGame);
             }
         }

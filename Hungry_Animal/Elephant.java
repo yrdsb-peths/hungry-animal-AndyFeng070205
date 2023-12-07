@@ -141,7 +141,7 @@ public class Elephant extends Actor
                 removeTouching(Poison.class);
                 myworld.damage();
                 if(myworld.life <= 0){
-                    Greenfoot.setWorld(new endScreen());
+                    Greenfoot.setWorld(new endScreen(myworld.score));
                 }
             }
             
