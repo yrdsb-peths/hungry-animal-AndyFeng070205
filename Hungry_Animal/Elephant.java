@@ -91,33 +91,42 @@ public class Elephant extends Actor
     }
     
     
-    private static int gravity = 2;
+        int gravity = 1;
+        boolean onGround = false;
+        int jumpForce = 25;
+        int upwardsVelocity = 0;
     public void jump(){
         World world = getWorld();
-        boolean onGround = false;
-        int acceleration = 3;
-        int jumpForce = 10;
         if(world instanceof MyWorld){
-            if(getY() == 300){
+            if(getY() >= 300){
                 onGround = true;
-                jumpForce = 12;
+                setLocation(getX(), 300);
             }
             if(getY() < 300){
                 if(right){
-                    setLocation(getX() + 2, getY() + acceleration++);
+                    setLocation(getX() + 2, getY() - upwardsVelocity);
                 }
                 else{
-                    setLocation(getX() - 2, getY() + acceleration++);
+                    setLocation(getX() - 2, getY() - upwardsVelocity);
                 }
+                // upwardsVelocity-=gravity;
             }
             if(Greenfoot.isKeyDown("w") && onGround){
                 jump.play();
-                while(jumpForce != 0){
-                    setLocation(getX(), getY() - jumpForce);
-                    jumpForce -= gravity;
+                // setLocation(getX(), getY() - jumpForce);
+                upwardsVelocity += jumpForce;
+                if(right){
+                    setLocation(getX() + 2, getY() - upwardsVelocity);
                 }
-                acceleration = 4;
+                else{
+                    setLocation(getX() - 2, getY() - upwardsVelocity);
+                }
+                onGround = false;
+                // upwardsVelocity-=gravity;
+            } else {
+                // upwardsVelocity = 0;
             }
+            upwardsVelocity-=gravity;
         }
     }
     
@@ -141,7 +150,7 @@ public class Elephant extends Actor
                 removeTouching(Poison.class);
                 myworld.damage();
                 if(myworld.life <= 0){
-                    Greenfoot.setWorld(new endScreen());
+                    Greenfoot.setWorld(new endScreen(myworld.score));
                 }
             }
             
